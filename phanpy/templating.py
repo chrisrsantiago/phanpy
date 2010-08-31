@@ -22,7 +22,7 @@ import os
 import hashlib
 import json
 
-from pylons import config, request
+from pylons import config, request, response
 import suit
 
 def render(template, **kwargs):
