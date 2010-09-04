@@ -53,12 +53,17 @@ def gravatar(params):
 
         ``size``
             The size for the given Gravatar. (**Optional**. Default: 80)
+
+        ``default``
+            The default image to use if the given email address does not have
+            a Gravatar. (**Optional**. Default: identicon)
     """
     email_hash = hashlib.md5(params['string']).hexdigest()
     rating = params['var']['rating']
     size = params['var']['size']
-    format = 'http://www.gravatar.com/avatar/%s?r=%s&s=%s'
-    c._gravatar = format % (email_hash, rating, size)
+    default = params['var']['default']
+    format = 'http://www.gravatar.com/avatar/%s?r=%s&s=%s&d=%s'
+    c._gravatar = format % (email_hash, rating, size, default)
     params['string'] = suit.execute(suitlons.rules, params['var']['markup'])
     return params
 
@@ -96,7 +101,8 @@ rules = {
             {
                 'markup': '<img src="[c]_gravatar[/c]" alt="">',
                 'rating': config.get('phanpy.gravatar.rating', 'PG'),
-                'size': config.get('phanpy.gravatar.size', '80')
+                'size': config.get('phanpy.gravatar.size', '80'),
+                'default': config.get('phanpy.gravatar.default', 'identicon')
             }
         }
     },
