@@ -27,12 +27,18 @@ except ImportError:
 
 setup(
     name='phanpy',
-    version='1.0.0',
+    version='1.0.1',
     description='''A collection of useful helper functions for projects that
     take advantage of suit-pylons.''',
     author='Chris Santiago (Faltzer)',
     author_email='faltzerr@aol.com',
     url='http://faltzershq.com/',
+    classifiers=[
+        'Development Status :: 5 - Production/Stable',
+        'Framework :: Pylons',
+        'Environment :: Web Environment',
+        'License :: OSI Approved :: MIT License'
+    ],
     install_requires=[
         'Pylons>=1.0',
         'python-openid>=2.2.1',
@@ -41,13 +47,8 @@ setup(
         'suit>=2.0.1'
     ],
     setup_requires=[],
+    test_suite='nose.collector',
     packages=find_packages(exclude=['ez_setup']),
     include_package_data=True,
-    zip_safe=False,
-    classifiers=[
-        'Development Status :: 5 - Production/Stable',
-        'Framework :: Pylons',
-        'Environment :: Web Environment',
-        'License :: OSI Approved :: MIT License'
-    ],
+    zip_safe=False
 )
