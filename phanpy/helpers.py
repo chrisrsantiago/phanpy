@@ -50,7 +50,12 @@ from lxml.html.clean import Cleaner
 from phanpy.templating import render
 from phanpy.markdown import markdown
 
-__all__ = ['convertdate', 'converttext', 'getip', 'htmlfill']
+__all__ = ['convertdate', 'converttext', 'getip', 'htmlencode', 'htmlfill',
+    'slug'
+]
+
+htmlencode_re = re.compile('\w')
+slug_re = re.compile(r"\W+", re.U)
 
 def base(string, base='base.tpl'):
     """Wrap the current content against a base template."""
@@ -114,25 +119,11 @@ def getip():
         request.environ.get('REMOTE_ADDR', '127.0.0.1')
     )
 
-def slug(string):
-    """Returns the title converted to all lowercase, and all non-alphanumeric
-    characters substitued with a dash.
-
-    ``string``
-        The string to format.
-
-    **Example Usage**:
-        >>> from phanpy.helpers import slug
-        >>> slug('Hello, Gentlemen')
-        'hello-gentlemen'
+def htmlencode(string):
+    """Converts all of the characters of a string into its equivalent HTML
+    entities.
     """
-    regex = re.compile(r"\W+", re.U)
-    string = re.sub(
-        r'^\W+|\W+$',
-        '',
-        re.sub(regex, '-', string.replace('_', '-'))
-    )
-    return string.lower()
+    return literal(''.join(['&#%d;' % ord(x) for x in string]))
 
 def htmlfill(error, form):
     """Convenience function to display FormEncode errors via htmlfill.
@@ -148,3 +139,22 @@ def htmlfill(error, form):
         errors=(error and error.unpack_errors()),
         encoding=response.determine_charset()
     )
+
+def slug(string):
+    """Returns the title converted to all lowercase, and all non-alphanumeric
+    characters substitued with a dash.
+
+    ``string``
+        The string to format.
+
+    **Example Usage**:
+        >>> from phanpy.helpers import slug
+        >>> slug('Hello, Gentlemen')
+        'hello-gentlemen'
+    """
+    string = re.sub(
+        r'^\W+|\W+$',
+        '',
+        re.sub(slug_re, '-', string.replace('_', '-'))
+    )
+    return string.lower()
