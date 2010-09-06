@@ -24,5 +24,7 @@
 """
 from phanpy import helpers, rules, templating, validators
 
-__version__ = '1.0.0'
 __all__ = ['helpers', 'rules', 'templating', 'validators']
+
+__author__ = 'Chris Santiago (faltzerr@aol.com)'
+__version__ = '1.0.0'

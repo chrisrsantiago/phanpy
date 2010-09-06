@@ -80,7 +80,7 @@ def converttext(string, parser=''):
     if parser == 'markdown':
         return markdown.convert(string)
     if parser == 'textile':
-        return textile(string, sanitize=True, encoding='utf-8')    
+        return textile.textile(string, sanitize=True, encoding='utf-8')    
     # Since no parser was selected, return sanitized HTML output with all 
     # unsafe tags and attributes stripped.
     cleaner = Cleaner(add_nofollow=True, comments=True, frames=True,
