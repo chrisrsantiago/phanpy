@@ -20,10 +20,9 @@
 
 """FormEncode Validators."""
 from openid.yadis.discover import discover
-from formencode.validators import String
+from formencode.validators import String, Invalid
 
 __all__ = ['OpenId']
-
 
 class OpenId(String):
     """Verify that the provided URI/XRI is an OpenID."""

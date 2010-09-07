@@ -62,7 +62,7 @@ def gravatar(params):
     rating = params['var']['rating']
     size = params['var']['size']
     default = params['var']['default']
-    format = 'http://www.gravatar.com/avatar/%s?r=%s&s=%s&d=%s'
+    format = 'http://www.gravatar.com/avatar/%s?r=%s&amp;s=%s&amp;d=%s'
     c._gravatar = format % (email_hash, rating, size, default)
     params['string'] = suit.execute(suitlons.rules, params['var']['markup'])
     return params
