@@ -27,7 +27,7 @@ except ImportError:
 
 setup(
     name='phanpy',
-    version='1.0.1',
+    version='1.1.0',
     description='''A collection of useful helper functions for projects that
     take advantage of suit-pylons.''',
     author='Chris Santiago (Faltzer)',
