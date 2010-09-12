@@ -44,7 +44,8 @@ setup(
         'python-openid>=2.2.1',
         'FormEncode>=1.2.2',
         'rulebox>=1.1.0',
-        'suit>=2.0.1'
+        'suit>=2.0.1',
+        'Markdown-2.0.3'
     ],
     setup_requires=[],
     test_suite='nose.collector',

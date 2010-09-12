@@ -43,12 +43,12 @@ from pylons import config, request, response, tmpl_context as c
 from dateutil import parser as dateutil
 from formencode import htmlfill as htmlfill_
 from webhelpers.html import literal
-from webhelpers.html.converters import textile, nl2br
+from webhelpers.html.converters import textile
+from markdown import Markdown
 from markupsafe import Markup
 from lxml.html.clean import Cleaner
 
 from phanpy.templating import render
-from phanpy.markdown import markdown
 
 __all__ = ['convertdate', 'converttext', 'getip', 'htmlencode', 'htmlfill',
     'slug'
@@ -62,10 +62,24 @@ def base(string, base='base.tpl'):
     c.content = string
     return render(base)
 
-def converttext(string, parser=''):
-    """Takes formatted input to return mark-up based on the given parsers,
-    markdown or textile.  If neither are chosen, then the output is sanitized
-    (read: unsafe HTML is stripped from the string.)
+def converttext(string, parser='', markdown_extensions=['codehilite']):
+    """Takes formatted input to return mark-up generated from the given parser.
+
+    ``string``
+        The string to format.
+
+    ``parser``
+        The desired parser to use.  Valid choices are: markdown, textile,
+        or None.  If neither are chosen, then the output is sanitized  (read:
+        unsafe HTML is stripped from the string.)
+
+    ``markdown_extensions``
+        Since Markdown 2.0, extension support has existed, which opens the door
+        to customization.  By default, phanpy loads the codehilite extension,
+        allowing for code syntax highlighting.  For more information on 
+        available Markdown extensions, including Codehilite, consult the 
+        `Markdown documentation 
+            <http://www.freewisdom.org/projects/python-markdown/>`_.
 
     **Example Usage**:
         >>> from phanpy.helpers import converttext
@@ -78,6 +92,7 @@ def converttext(string, parser=''):
     # if they deem it necessary.
     string = Markup(string).unescape()
     if parser == 'markdown':
+        markdown = Markdown(markdown_extensions, safe_mode='escape')
         return markdown.convert(string)
     if parser == 'textile':
         return textile.textile(string, sanitize=True, encoding='utf-8')    

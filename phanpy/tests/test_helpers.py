@@ -28,20 +28,21 @@ def test_converttext():
         ''
     )
 
+    markdown
     assert_equal(
         markdown,
-        u'<p><strong>Hello World!</strong>\n</p>',
-        u'Markdown works'
+        u'<p><strong>Hello World!</strong></p>',
+        u'Markdown does not work'
     )
     assert_equal(
         textile,
         '<p><strong>Hello World!</strong></p>',
-        u'Textile works'
+        u'Textile does not work'
     )
     assert_equal(
         html,
         u'<p>Hello, I am <strong>very</strong><em>evil</em>.</p>',
-        u'Sanitized HTML works'
+        u'Sanitized HTML does not work'
     )
 
 def test_htmlencode():
@@ -52,4 +53,4 @@ def test_htmlencode():
 def test_slug():
     given = 'phanpy can be found @ http://pypi.python.org/phanpy/'
     expected = 'phanpy-can-be-found-http-pypi-python-org-phanpy'
-    assert_equal(h.slug(given), expected, u'Slug generation works.')
+    assert_equal(h.slug(given), expected, u'Slug generation does not work.')
