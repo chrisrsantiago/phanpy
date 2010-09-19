@@ -22,9 +22,9 @@
     A collection of useful helper functions for projects that take advantage of
     suit-pylons.
 """
-from phanpy import helpers, rules, templating, validators
+from phanpy import helpers, rules, templating
 
-__all__ = ['helpers', 'rules', 'templating', 'validators']
+__all__ = ['helpers', 'rules', 'templating']
 
 __author__ = 'Chris Santiago (faltzerr@aol.com)'
 __version__ = '1.0.0'

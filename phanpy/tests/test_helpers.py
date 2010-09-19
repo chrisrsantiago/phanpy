@@ -48,7 +48,7 @@ def test_converttext():
 def test_htmlencode():
     given = 'Hello World!'
     expected = u'&#72;&#101;&#108;&#108;&#111;&#32;&#87;&#111;&#114;&#108;&#100;&#33;'
-    assert_equal(h.htmlencode(given), expected)
+    assert_equal(h.htmlencode(given), expected, u'HTML encoding does not work.')
 
 def test_slug():
     given = 'phanpy can be found @ http://pypi.python.org/phanpy/'
