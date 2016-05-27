@@ -61,14 +61,14 @@ def render(template, rules=None, slacks=False):
     )
     if not rules:
         rules = config['suit.rules']
-    defaultlog = {'hash': {}, 'contents': []}
+
     try:
         content = open(filepath).read()
     except IOError:
         raise IOError('Template does not exist: %s' % filepath)
 
     result = suit.execute(rules, content)
-
+    defaultlog = {'hash': {}, 'contents': []}
     if 'slacks' in request.params and slacks:
         # Granted slacks is enabled for this template and receive a request
         # for slacks, then return JSON'd output instead.
@@ -82,6 +82,5 @@ def render(template, rules=None, slacks=False):
             ('Content-Disposition', 'attachment; filename=slacks.json'),
             ('Content-Length', len(slacks))
         ]
-        suit.log = defaultlog
         return slacks
     return result

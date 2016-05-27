@@ -30,9 +30,9 @@ setup(
     version='1.1.0',
     description='''A collection of useful helper functions for projects that
     take advantage of suit-pylons.''',
-    author='Chris Santiago (Faltzer)',
-    author_email='faltzerr@aol.com',
-    url='http://faltzershq.com/',
+    author='Chris Santiago',
+    author_email='chrisrsantiago@aol.com',
+    url='http://github.com/chrisrsantiago/phanpy',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Framework :: Pylons',
